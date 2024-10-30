@@ -1,0 +1,9 @@
+.login-page-container {
+    margin: 10px 100px 10px 100px;
+    font-size: 18px;
+}
+
+.login-page-container h4 {
+    color: white;
+    font-size: 2rem;
+}

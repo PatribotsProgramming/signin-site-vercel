@@ -1,0 +1,89 @@
+.suggestions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: #ccc;
+    width: 100%;
+    margin-bottom: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
+    outline: none;
+    padding: 10px;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    box-shadow:
+        inset 0 -5px 45px rgba(100, 100, 100, 0.2),
+        0 1px 1px rgba(255, 255, 255, 0.2);
+    -webkit-transition: box-shadow 0.5s ease;
+    -moz-transition: box-shadow 0.5s ease;
+    -o-transition: box-shadow 0.5s ease;
+    -ms-transition: box-shadow 0.5s ease;
+    transition: box-shadow 0.5s ease;
+    position: relative;
+    z-index: 5;
+    backdrop-filter: blur(2px);
+}
+
+.suggestions li {
+    position: relative;
+    list-style: none;
+    padding: 10px;
+    border: 5px solid transparent;
+    border-radius: 5px; /* curved borders */
+    background-clip: padding-box;
+}
+
+.suggestions li:hover {
+    cursor: pointer;
+}
+
+.suggestions li:hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #272727;
+    border-radius: inherit;
+    z-index: -1;
+}
+
+.suggestions li.active {
+    position: relative;
+    border: 5px solid transparent;
+    border-radius: 5px;
+}
+
+.suggestions li.active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0px;
+    right: 0;
+    bottom: 0;
+    background: #272727;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    z-index: -1;
+}
+
+.suggestions li.active::after {
+    position: absolute;
+    content: '';
+    width: 0.33rem;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-right: #0abfff 5px solid;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.auto-complete-ghost {
+    position: absolute;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.295);
+}

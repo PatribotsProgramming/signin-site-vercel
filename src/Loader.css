@@ -1,0 +1,48 @@
+.loader {
+    --size: 10rem;
+    width: var(--size);
+    height: var(--size);
+    display: inline-block;
+    position: relative;
+    animation: fadeOut 3s forwards;
+}
+
+.loader::after,
+.loader::before {
+    content: '';
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    border: 2px solid #fff;
+    position: absolute;
+    left: 0;
+    bottom: 10%;
+    animation: pulse 2s linear infinite both;
+}
+
+.loader::after {
+    animation-delay: 1s;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    95% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

@@ -1,0 +1,218 @@
+:root {
+    --left: 65%;
+}
+
+.instructions {
+    position: absolute;
+    top: 0%;
+    padding-top: 1vh;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+    font-size: 1.5rem;
+    color: #ebf9ff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.activity-state {
+    display: flex;
+    justify-content: center;
+}
+
+.top-bottom-borders {
+    border-top: 3px solid #bbb;
+    border-bottom: 3px solid #bbb;
+}
+
+.text-red {
+    color: red;
+}
+
+.text-green {
+    color: lime;
+}
+
+.login {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    cursor: default;
+}
+
+.login h1 {
+    color: #ebf9ff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.student-side {
+    top: 30%;
+    left: 32.5%;
+    margin: -150px 0 0 -150px;
+    padding-top: 1em;
+}
+
+.parent-side {
+    top: 30%;
+    left: 82%;
+    width: max-content;
+    margin: -150px 0 0 -150px;
+    padding-top: 1em;
+}
+
+input {
+    width: 100%;
+    margin-bottom: 10px;
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
+    outline: none;
+    padding: 10px;
+    color: #fff;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    box-shadow:
+        inset 0 -5px 45px rgba(100, 100, 100, 0.2),
+        0 1px 1px rgba(255, 255, 255, 0.2);
+    -webkit-transition: box-shadow 0.5s ease;
+    -moz-transition: box-shadow 0.5s ease;
+    -o-transition: box-shadow 0.5s ease;
+    -ms-transition: box-shadow 0.5s ease;
+    transition: box-shadow 0.5s ease;
+}
+
+.form {
+    cursor: text;
+}
+
+input:focus {
+    box-shadow:
+        inset 0 -5px 45px rgba(100, 100, 100, 0.4),
+        0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+.names {
+    position: relative;
+    transition: border 0.2s ease-in;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.names::before,
+.group::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.34);
+    transition: width 0.2s ease-in;
+    transform: translateX(-50%);
+}
+
+.names:hover::before,
+.group:hover::before {
+    width: 100%;
+}
+
+.name {
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    display: grid;
+    align-items: center;
+    position: relative;
+    max-width: 0;
+    overflow: hidden;
+    animation: width-in 2s ease-out forwards;
+}
+
+.name span span {
+    position: relative;
+}
+
+.name span span::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: white;
+    transition: width 0.3s ease-out;
+    transform: translateY(-50%);
+}
+
+/* 
+.name:hover, .group:hover {
+	cursor: pointer;
+}
+
+.name span span:hover {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.name span span:hover::before {
+  width: 100%;
+} 
+*/
+
+.students {
+    position: absolute;
+    top: 30%;
+    padding-left: 2vw;
+    font-size: 1.5rem;
+    width: var(--left);
+    cursor: default;
+    animation: fade-in 1s ease-in forwards;
+}
+
+.group {
+    position: relative;
+    flex: 1;
+    white-space: nowrap;
+    overflow-y: auto;
+    max-height: 60vh;
+}
+
+.group-name {
+    padding-top: 1vh;
+    position: sticky;
+    top: 0;
+    background: inherit;
+    z-index: 1;
+}
+
+.mentors {
+    position: absolute;
+    top: 30%;
+    left: var(--left);
+    padding-left: 2vw;
+    font-size: 1.5rem;
+    width: calc(100% - var(--left));
+    cursor: default;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes width-in {
+    from {
+        max-width: 0;
+    }
+    to {
+        max-width: 100%;
+    }
+}
