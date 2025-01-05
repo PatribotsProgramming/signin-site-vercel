@@ -99,16 +99,24 @@ function EventManager(input, isStudent = true) {
                 const inputValue = value.trim()
 
                 const parsedInput = parseInput(inputValue);
+                
                 if (!parsedInput) {
                     createErrorMessage(e);
                     return;
                 }
-
+                
                 let currentHours = parseInt(duration.split(':')[0]);
                 let currentMinutes = parseInt(duration.split(':')[1]);
 
+                
                 let hours = currentHours + parsedInput.inputHours;
-                let minutes = currentMinutes + parsedInput.inputMinutes;
+                const isNegative = inputValue.startsWith('-');
+                let minutes = 0;
+                if (isNegative) {
+                    minutes = currentMinutes - parsedInput.inputMinutes;                    
+                } else {
+                    minutes = currentMinutes + parsedInput.inputMinutes;
+                }
 
                 const adjustedTime = adjustTime(hours, minutes);
                 hours = adjustedTime.hours;
@@ -119,7 +127,7 @@ function EventManager(input, isStudent = true) {
                     return;
                 }
                 setDuration(hours + ':' + minutes)
-                input.onSubmit(hours, minutes)
+                input.onSubmit(parsedInput.inputHours, parsedInput.inputMinutes, isNegative)
 
                 e.target.value = ''
                 break;

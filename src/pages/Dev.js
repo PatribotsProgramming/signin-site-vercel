@@ -28,7 +28,7 @@ function Dev() {
         })
     }
 
-    const handleDurationChange = (addedHours, addedMinutes) => {
+    const handleDurationChange = (addedHours, addedMinutes, isNegative) => {
         // Get the current duration of the current day
         // += the added duration
         // Set the new duration
@@ -62,13 +62,15 @@ function Dev() {
                         ].duration || '0:0:0'
                     console.log(duration)
                 }
+                console.log(addedHours, addedMinutes)
                 let [hours, minutes, seconds] = duration.split(':')
                 // the addedDuration is in hours
                 hours = parseInt(hours) + parseInt(addedHours)
-
-                console.log(minutes, addedMinutes)
-                minutes = parseInt(minutes) + parseInt(addedMinutes)
-                console.log(minutes, addedMinutes)
+                if (isNegative) {
+                    minutes = parseInt(minutes) - parseInt(addedMinutes)
+                } else {
+                    minutes = parseInt(minutes) + parseInt(addedMinutes)
+                }
 
                 if (hours < 0) {
                     hours = 0;

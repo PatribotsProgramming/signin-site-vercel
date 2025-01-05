@@ -89,7 +89,7 @@ function Home() {
                         json.valueRanges[2].values
                     ) {
                         setStudentWhitelist(
-                            json.valueRanges[2].values
+                            [...new Set(json.valueRanges[2].values
                                 .map((name) => name[0])
                                 .filter(
                                     (name) =>
@@ -97,7 +97,7 @@ function Home() {
                                         name
                                             .replace(/[^a-zA-Z0-9 ]/g, '')
                                             .trim() !== ''
-                                )
+                                ))]
                         )
                         setStudentHashmap(
                             json.valueRanges[2].values.reduce(
@@ -109,7 +109,7 @@ function Home() {
                             )
                         )
                         setParentWhitelist(
-                            json.valueRanges[2].values
+                            [...new Set(json.valueRanges[2].values
                                 .map((row) => {
                                     // Extract parent names from columns 3-8
                                     let parentNames = row
@@ -123,8 +123,9 @@ function Home() {
                                         name
                                             .replace(/[^a-zA-Z0-9 ]/g, '')
                                             .trim() !== ''
-                                )
-                        )
+                                ))]
+
+                            )
                     }
                     setIsLoading(false)
                 })
