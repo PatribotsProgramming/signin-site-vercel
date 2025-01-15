@@ -1,0 +1,77 @@
+import './WeekView.css';
+import { useState } from 'react';
+
+const generateTimeSlots = () => {
+    const times = [];
+    for (let hour = 9; hour <= 21; hour++) {
+        const period = hour < 12 ? 'AM' : 'PM';
+        const displayHour = hour % 12 === 0 ? 12 : hour % 12;
+        times.push(`${displayHour} ${period}`);
+    }
+    return times;
+};
+
+const generateGridItems = () => {
+    const items = [];
+    const totalRows = 23 - 9;
+    const totalItems = totalRows * 7; // (hours * days)
+
+    for (let i = 0; i < totalItems; i++) {
+        const isBottomRow = i >= totalItems - 7; // Check if the item is in the bottom row
+        const isRightColumn = (i + 1) % 7 === 0; // Check if the item is in the rightmost column
+        let className = 'week-view-grid-item';
+
+        if (isBottomRow) {
+            className += ' no-bottom-border';
+        }
+        if (isRightColumn) {
+            className += ' no-right-border';
+        }
+
+        items.push(<div className={className} key={i}></div>);
+    }
+    return items;
+};
+
+const getWeekDates = (currentDate) => {
+    const weekDates = [];
+    const firstDayOfWeek = currentDate.getDate() - currentDate.getDay(); // Get the first day of the current week (Sunday)
+
+    for (let i = 0; i < 7; i++) {
+        const date = new Date(currentDate.setDate(firstDayOfWeek + i));
+        weekDates.push(date.getDate());
+    }
+
+    return weekDates;
+};
+
+const WeekView = ({ date, user }) => {
+    const timeSlots = generateTimeSlots();
+    const weekDates = getWeekDates(date);
+    const weekDays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const gridItems = generateGridItems();
+
+    return (
+        <div className="week-view">
+            <div className="week-view-grid-container">
+                <div className='times-header'>
+                    {timeSlots.map((time, index) => (
+                        <div className='time' key={index}>{time}</div>
+                    ))}
+                </div>
+                <div>
+                    <div className="week-view-grid-header">
+                        {weekDays.map((day, index) => (
+                            <div key={index}>{day} {weekDates[index]}</div>
+                        ))}
+                    </div>
+                    <div className="week-view-grid">
+                        {gridItems}
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default WeekView;

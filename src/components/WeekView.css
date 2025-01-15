@@ -1,0 +1,72 @@
+.week-view {
+    color: white;
+    margin-right: 1.2rem;
+    width: 98%;
+}
+
+.week-view-grid-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: solid 2px black; */
+    position: sticky;
+    top: 0;
+    background-color: inherit;
+    z-index: 1;
+}
+
+.week-view-grid-header > div {
+    width: 100%;
+    text-align: center;
+    padding: 1.5vh 4.5vw;
+    
+}
+
+.week-view-grid-item {
+    border-right: solid 2px rgba(255, 255, 255, 0.25);
+    border-bottom: solid 2px rgba(255, 255, 255, 0.25);
+    text-align: center;
+    min-height: 6.05vh;
+}
+
+.week-view-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    /* border: solid 2px black; */
+    /* width: 25px; */
+}
+
+
+.week-view-grid-container {
+    display: flex;
+    /* justify-content: center;
+    align-items: center;  */
+    /* border: solid 2px blue; */
+    overflow: auto;
+    max-height: 95vh;
+}
+
+.no-bottom-border {
+    border-bottom: transparent;
+}
+
+.no-right-border {
+    border-right: transparent; 
+}
+
+.times-header {
+    margin: 83px 10px;
+    width: 60px;
+    text-align: right;
+    position: relative;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    /* display: flex; */
+    /* border: solid 2px limegreen; */
+}
+
+
+.times-header > div {
+    margin: 3vh 0;
+    /* border: solid 2px black; */
+}

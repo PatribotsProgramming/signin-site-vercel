@@ -1,22 +1,19 @@
 import { useState, useContext } from 'react'
 import { AppContext } from '../App.js'
 import AutoComplete from '../components/AutoComplete.js'
-import EventManager from '../components/EventManager.js'
-import ErrorList from '../components/ErrorList.js'
 import EventList from '../components/EventList.js'
 import './Dev.css'
 import './Dev2.css'
 import { getData, setData } from '../utils/firebaseConfig.js'
 import DateSelector from '../components/DateSelector.js'
 import DurationChanger from '../components/DurationChanger.js'
+import WeekView from '../components/WeekView.js'
 
 function Dev() {
     const [studentWhitelist, parentWhitelist] = useContext(AppContext);
     const [selectedDate, setSelectedDate] = useState(new Date(Date.now()))
 
-    let inputName = ''
-    let inputDate = new Date().toISOString().split('T')[0]
-    const [selectedName, setSelectedName] = useState(inputName)
+    const [selectedName, setSelectedName] = useState('')
     const [updateEventList, setUpdateEventList] = useState(false)
 
     function toTitleCase(str) {
@@ -122,7 +119,7 @@ function Dev() {
             </aside>
             <main className="main-content">
                 {/* <Header date={selectedDate} /> */}
-                {/* <WeekView date={selectedDate} user={selectedUser} /> */}
+                <WeekView date={selectedDate} user={selectedName} />
             </main>
         </div>
     )
