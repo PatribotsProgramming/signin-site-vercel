@@ -1,4 +1,4 @@
-import { set, ref, query, onValue } from 'firebase/database'
+import { set, ref } from 'firebase/database'
 import { db } from './firebaseConfig'
 
 export function setData(
@@ -11,7 +11,7 @@ export function setData(
     isStudent: boolean
 ) {
     // Adjust the path based on whether it's a student or not
-    const basePath = isStudent ? '/Students' : '/NonStudents'
+    const basePath = isStudent ? '/Students' : '/Parents'
     const path = `${basePath}/${name}/${year}/${month}/${day}/${state}`
 
     // Now, set the data using the modified path
