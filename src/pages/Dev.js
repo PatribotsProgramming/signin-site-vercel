@@ -1,15 +1,13 @@
-import { useState, useEffect } from 'react'
-import AutoComplete from '../components/AutoComplete'
-import EventManager from '../components/EventManager'
-import ErrorList from '../components/ErrorList'
+import { useState, useContext} from 'react'
+import { AppContext } from '../App.js'
+import AutoComplete from '../components/AutoComplete.js'
+import EventManager from '../components/EventManager.js'
+import ErrorList from '../components/ErrorList.js'
 import './Dev.css'
 import { getData, setData } from '../utils/firebaseConfig.js'
-import { min } from 'lodash'
 
 function Dev() {
-    const [studentWhitelist, setStudentWhitelist] = useState([])
-    const [parentWhitelist, setParentWhitelist] = useState([])
-    const [combinedWhitelist, setCombinedWhitelist] = useState([])
+    const [studentWhitelist, parentWhitelist] = useContext(AppContext);
 
     let inputName = ''
     let inputDate = new Date().toISOString().split('T')[0]
@@ -192,54 +190,6 @@ function Dev() {
             .filter((event) => event !== null)
     }
 
-    useEffect(() => {
-        fetch(process.env.REACT_APP_GET_SHEET_DATA, { method: 'GET' })
-            .then((response) => response.json())
-            .then((json) => {
-                if (
-                    json.valueRanges &&
-                    json.valueRanges[4] &&
-                    json.valueRanges[4].values
-                ) {
-                    setErrors(json.valueRanges[4].values.map((row) => row[0]))
-                }
-
-                if (
-                    json.valueRanges &&
-                    json.valueRanges[2] &&
-                    json.valueRanges[2].values
-                ) {
-                    const studentNames = json.valueRanges[2].values
-                        .map((name) => name[0])
-                        .filter(
-                            (name, index, self) =>
-                                name !== undefined &&
-                                name.replace(/[^a-zA-Z0-9 ]/g, '').trim() !==
-                                    '' &&
-                                self.indexOf(name) === index // Check if the current index is the first occurrence of the name
-                        )
-                    setStudentWhitelist(studentNames)
-
-                    const parentNames = json.valueRanges[2].values
-                        .map((row) => {
-                            // Extract parent names from columns 3-8
-                            let parentNames = row
-                                .slice(2, 8)
-                                .filter((name) => name !== undefined)
-                            return parentNames
-                        })
-                        .flat() // Flatten the array
-                        .filter(
-                            (name, index, self) =>
-                                name.replace(/[^a-zA-Z0-9 ]/g, '').trim() !==
-                                    '' && self.indexOf(name) === index // Check if the current index is the first occurrence of the name
-                        )
-                    setParentWhitelist(parentNames)
-                    setCombinedWhitelist([...studentNames, ...parentNames])
-                }
-            })
-    }, [])
-
     return (
         <div>
             <span className="grid-container">
@@ -256,7 +206,7 @@ function Dev() {
                             </h1>
                             <AutoComplete
                                 onSubmit={handleNameChange}
-                                whitelist={combinedWhitelist}
+                                whitelist={[...studentWhitelist, ...parentWhitelist]}
                                 devSite={true}
                             />
                         </span>

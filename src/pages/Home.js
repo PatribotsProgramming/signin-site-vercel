@@ -1,5 +1,6 @@
-import { React, useState, useEffect } from 'react'
-import AutoComplete from '../components/AutoComplete'
+import { React, useState, useEffect, useContext } from 'react'
+import { AppContext } from '../App.js'
+import AutoComplete from '../components/AutoComplete.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Home.css'
 import '../Loader.css'
@@ -8,8 +9,7 @@ import { getData, setData } from '../utils/firebaseConfig.js'
 function Home() {
     const [studentNames, setStudentNames] = useState([])
     const [parentNames, setParentNames] = useState([])
-    const [studentWhitelist, setStudentWhitelist] = useState([])
-    const [parentWhitelist, setParentWhitelist] = useState([])
+    const [studentWhitelist, parentWhitelist] = useContext(AppContext);
     const [studentHashmap, setStudentHashmap] = useState([{}])
     const [isLoading, setIsLoading] = useState(true)
     const [recentActivityState, setRecentActivityState] = useState('')
@@ -20,15 +20,6 @@ function Home() {
         'Marketing',
         'Leadership',
     ]
-
-    // function setData(name, year, month, day, state, value, isStudent = true) {
-    //     // Adjust the path based on whether it's a student or not
-    //     const basePath = isStudent ? '/Students' : '/NonStudents';
-    //     const path = `${basePath}/${name}/${year}/${month}/${day}/${state}`;
-
-    //     // Now, set the data using the modified path
-    //     set(ref(db, path), value);
-    // }
 
     // Pull from the cache in sheets on startup
     useEffect(() => {
@@ -75,61 +66,10 @@ function Home() {
                 }
             })
 
-            setStudentNames(studentNames)
-            setParentNames(parentNames)
+            setStudentNames(studentNames);
+            setParentNames(parentNames);
+            setIsLoading(false);
         })
-        setTimeout(() => {
-            fetch(process.env.REACT_APP_GET_SHEET_DATA, { method: 'GET' })
-                .then((response) => response.json())
-                .then((json) => {
-                    // Set the studentWhitelist based upon col 5
-                    if (
-                        json.valueRanges &&
-                        json.valueRanges[2] &&
-                        json.valueRanges[2].values
-                    ) {
-                        setStudentWhitelist(
-                            [...new Set(json.valueRanges[2].values
-                                .map((name) => name[0])
-                                .filter(
-                                    (name) =>
-                                        name !== undefined &&
-                                        name
-                                            .replace(/[^a-zA-Z0-9 ]/g, '')
-                                            .trim() !== ''
-                                ))]
-                        )
-                        setStudentHashmap(
-                            json.valueRanges[2].values.reduce(
-                                (acc, [name, group]) => {
-                                    acc[name] = group
-                                    return acc
-                                },
-                                {}
-                            )
-                        )
-                        setParentWhitelist(
-                            [...new Set(json.valueRanges[2].values
-                                .map((row) => {
-                                    // Extract parent names from columns 3-8
-                                    let parentNames = row
-                                        .slice(2, 8)
-                                        .filter((name) => name !== undefined)
-                                    return parentNames
-                                })
-                                .flat() // Flatten the array
-                                .filter(
-                                    (name) =>
-                                        name
-                                            .replace(/[^a-zA-Z0-9 ]/g, '')
-                                            .trim() !== ''
-                                ))]
-
-                            )
-                    }
-                    setIsLoading(false)
-                })
-        }, 3000)
     }, [])
 
     const acceptedAnimation = (ref) => {

@@ -1,28 +1,31 @@
 import './EventList.css'
-import { useEffect, useState } from 'react'
+import { AppContext } from '../App.js'
+import { useContext, useEffect, useState } from 'react'
 import { getData } from '../utils/firebaseConfig.js'
 
-const EventList = ({date, user, isStudent = true}) => {
+const EventList = ({date, user, forceUpdate}) => {
     const [events, setEvents] = useState([])
     const [duration, setDuration] = useState('0:0:0')
+    const [studentList, parentList] = useContext(AppContext)
+
+    function toTitleCase(str) {
+        return str.replace(/\w\S*/g, function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+        })
+    }
 
     useEffect(() => {
         const data = getData()
         let name = user
         // Capitalize each beginning letter of the name
-        name = name
-            .split(' ')
-            .map((word) => {
-                return word.charAt(0).toUpperCase() + word.slice(1)
-            })
-            .join(' ')
-
+        name = toTitleCase(name)
+        
         let year = date.getFullYear();
         let month = date.getMonth()+1;
         let day = date.getDate();
-        console.log(year, month, day);
         
         data?.then((data) => {
+            const isStudent = studentList.includes(name);
             const eventData = isStudent ? data?.Students : data?.Parents
             const nameData = eventData?.[name]
             const yearData = nameData?.[year]
@@ -44,22 +47,16 @@ const EventList = ({date, user, isStudent = true}) => {
             const eventDataWithoutDurationAndSignedIn = Object.entries(dayData)
                 .filter(([key]) => key !== 'duration' && key !== 'signedIn')
                 .map(([_, value]) => {
-                    const inTime = new Date(value.in).toLocaleTimeString(
+                    const formatTime = (time) => new Date(time).toLocaleTimeString(
                         'en-US',
                         {
-                            hour12: false,
+                            hour12: true,
                             hour: '2-digit',
                             minute: '2-digit',
                         }
                     )
-                    const outTime = new Date(value.out).toLocaleTimeString(
-                        'en-US',
-                        {
-                            hour12: false,
-                            hour: '2-digit',
-                            minute: '2-digit',
-                        }
-                    )
+                    const inTime = formatTime(value.in)
+                    const outTime = formatTime(value.out)
                     return [
                         { state: 'In', time: inTime },
                         { state: 'Out', time: outTime },
@@ -71,25 +68,26 @@ const EventList = ({date, user, isStudent = true}) => {
             let hours = dayData?.duration.split(':')[0]
             let minutes = dayData?.duration.split(':')[1]
             // if mins is less than 10, add a 0 at end
-            if (minutes.length === 1) {
-                minutes += '0'
-            }
+            minutes = minutes.toString().padStart(2, '0');
             setDuration(hours + ':' + minutes)
         })
-    }, [user, date, isStudent])
+    }, [user, date, forceUpdate])
 
     return (
         <div className='event-list'>
             <h3>Events</h3>
-            <ul>
+            <ul className='event-list-container'>
                 {events && events.map((event, index) => (
-                    <li key={index}>
+                    <p className={`event ${event.state.toLowerCase()}`} key={index}>
                         {event.state} - {event.time}
-                    </li>
+                    </p>
                 ))}
             </ul>
-            <h3>Total Duration</h3>
-            <p>{duration} hours</p>
+            <div className='total'>
+                <h4>Daily Duration: </h4>
+                <h4 className='duration'>{duration} </h4>
+                <h4>hrs</h4>
+            </div>
         </div>
     )
 
