@@ -52,8 +52,8 @@ function DurationChanger({onSubmit}) {
         errorMessage.className = 'error-message';
 
         // Position it above the input element
-        errorMessage.style.left = `${e.target.offsetLeft + e.target.offsetWidth * 1.1}px`;
-        errorMessage.style.top = `${e.target.offsetTop + 4}px`;
+        errorMessage.style.left = `${e.target.offsetLeft + e.target.offsetWidth/2 - 73}px`;
+        errorMessage.style.top = `${e.target.offsetTop + e.target.offsetHeight * 1.1}px`;
 
         // Insert it into the DOM
         e.target.parentNode.insertBefore(errorMessage, e.target);
