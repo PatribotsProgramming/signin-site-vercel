@@ -84,9 +84,9 @@ const EventList = ({date, user, forceUpdate}) => {
                 ))}
             </ul>
             <div className='total'>
-                <h4>Daily Duration: </h4>
-                <h4 className='duration'>{duration} </h4>
-                <h4>hrs</h4>
+                <h5>Daily Duration: </h5>
+                <h5 className='duration'>{duration} </h5>
+                <h5>hrs</h5>
             </div>
         </div>
     )
