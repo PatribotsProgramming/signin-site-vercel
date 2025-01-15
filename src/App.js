@@ -1,6 +1,6 @@
 import Home from './pages/Home'
 import Dev from './pages/Dev'
-// import Dev2 from './pages/Dev2'
+import Dev2 from './pages/Dev2'
 import LoginPage from './pages/LoginPage'
 
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
@@ -53,7 +53,7 @@ function App() {
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/Dev" element={<Dev />} />
-                            {/* <Route path="/Dev2" element={<Dev2 />} /> */}
+                            <Route path="/Dev2" element={<Dev2 />} />
                             <Route path="*" element={<h1>404</h1>} />
                         </Routes>
                     </BrowserRouter>
