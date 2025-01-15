@@ -1,3 +1,35 @@
 .event-list {
     color: white;
 }
+
+.event {
+    border-radius: 5px;
+    text-align: center;
+    padding: 5px;
+}
+
+.in {
+    background: rgba(130, 220, 255, 0.336);
+}
+
+.out {
+    background: rgba(138, 94, 181, 0.336);
+}
+
+.total {
+    display: flex;
+    gap: .3rem;
+}
+
+.duration {
+    color: rgb(83, 255, 97);
+}
+
+.event-list-container {
+    min-height: 200px; /* fits four events */
+    max-height: 200px;
+    overflow-y: auto;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
