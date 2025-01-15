@@ -8,16 +8,17 @@ function EventManager(input, isStudent = true) {
     const [duration, setDuration] = useState('0:0:0')
     const [signedIn, setSignedIn] = useState(false)
 
+    function toTitleCase(str) {
+        return str.replace(/\w\S*/g, function (txt) {
+            return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase()
+        })
+    }
+
     useEffect(() => {
         const data = getData()
         let name = input.name
         // Capitalize each beginning letter of the name
-        name = name
-            .split(' ')
-            .map((word) => {
-                return word.charAt(0).toUpperCase() + word.slice(1)
-            })
-            .join(' ')
+        name = toTitleCase(name)
 
         let [year, month, day] = input.date.split('-')
 
@@ -108,7 +109,6 @@ function EventManager(input, isStudent = true) {
                 let currentHours = parseInt(duration.split(':')[0]);
                 let currentMinutes = parseInt(duration.split(':')[1]);
 
-                
                 let hours = currentHours + parsedInput.inputHours;
                 const isNegative = inputValue.startsWith('-');
                 let minutes = 0;
@@ -132,9 +132,6 @@ function EventManager(input, isStudent = true) {
                 e.target.value = ''
                 break;
             case 'Escape':
-                // in case the above case was just triggered,
-                // wait a bit before clearing the value
-                // so that it can be sent to onSubmit
                 e.target.value = ''
                 e.preventDefault()
                 break
