@@ -1,0 +1,14 @@
+.sidebar {
+    width: fit-content;
+    max-width: 256px;
+    margin: 1.2rem;
+    display: grid;
+    grid-template-columns: auto;
+    grid-row-gap: 1.2rem;
+    /* border: solid 2px black; */   
+}
+
+.auto-complete {
+    z-index: 1;
+}
+
