@@ -173,7 +173,7 @@ const AutoComplete = ({ whitelist, onSubmit, devSite = false }) => {
                     onChange={onChange}
                     ref={autoCompleteRef}
                     onKeyDown={keyDownHandler}
-                    placeholder="Enter your full name"
+                    placeholder={devSite ? "Enter name to edit" : "Enter your full name"}
                     required="required"
                     onClick={() => setShowSuggestions(value.trim().length > 0)}
                 />
