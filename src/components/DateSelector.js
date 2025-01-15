@@ -17,6 +17,12 @@ const DateSelector = ({onSubmit}) => {
         onSubmit(newDate);
     }
 
+    const onMonthChange = (month) => {
+        const newDate = new Date(year, month, day);
+        setCurrentDate(newDate);
+        onSubmit(newDate);
+    }
+
     const pushDay = (days, day) => {
         days.push(
             <td key={day}>
@@ -79,8 +85,8 @@ const DateSelector = ({onSubmit}) => {
         <div className="date-selector">
             <div className="month-selector">
                 <span>{currentDate.toLocaleString('default', { month: 'long' })} {year}</span>
-                <button className='arrow' onClick={() => setCurrentDate(new Date(year, month + 1, day))}>{rightArrow}</button>
-                <button className='arrow' onClick={() => setCurrentDate(new Date(year, month - 1, day))}>{leftArrow}</button>
+                <button className='arrow' onClick={() => onMonthChange(month + 1)}>{rightArrow}</button>
+                <button className='arrow' onClick={() => onMonthChange(month - 1)}>{leftArrow}</button>
             </div>
             <table>
                 <thead>

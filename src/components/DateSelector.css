@@ -2,6 +2,7 @@
     color: white;
     max-width: min-content;
     user-select: none;
+    height: calc(1.2rem * 11.5);
 }
 
 table {
