@@ -11,9 +11,10 @@ import WeekView from '../components/WeekView.js'
 
 function Dev() {
     const [studentWhitelist, parentWhitelist] = useContext(AppContext);
-    const [selectedDate, setSelectedDate] = useState(new Date(Date.now()))
-
     const [selectedName, setSelectedName] = useState('')
+    const [selectedDate, setSelectedDate] = useState(new Date(Date.now()))
+    
+    const [eventList, setEventList] = useState([])
     const [updateEventList, setUpdateEventList] = useState(false)
 
     function toTitleCase(str) {
@@ -101,6 +102,10 @@ function Dev() {
         setSelectedName(input)
     }
 
+    const recieveEventsForWeekView = (events) => {
+        setEventList(events);
+    };
+
     return (
         <div className="calendar-container">
             <aside className="sidebar">
@@ -114,12 +119,13 @@ function Dev() {
                     date={selectedDate} 
                     user={selectedName}
                     forceUpdate={updateEventList}
+                    sendEvents={recieveEventsForWeekView}
                 />
                 {selectedName && (<DurationChanger onSubmit={handleDurationChange} />)}
             </aside>
             <main className="main-content">
                 {/* <Header date={selectedDate} /> */}
-                <WeekView date={selectedDate} user={selectedName} />
+                <WeekView date={selectedDate} user={selectedName} events={eventList} />
             </main>
         </div>
     )

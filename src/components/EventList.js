@@ -3,8 +3,9 @@ import { AppContext } from '../App.js'
 import { useContext, useEffect, useState } from 'react'
 import { getData } from '../utils/firebaseConfig.js'
 
-const EventList = ({date, user, forceUpdate}) => {
+const EventList = ({date, user, forceUpdate, sendEvents }) => {
     const [events, setEvents] = useState([]);
+
     const [duration, setDuration] = useState('0:0:0');
     const [studentList, parentList] = useContext(AppContext);
 
@@ -71,6 +72,10 @@ const EventList = ({date, user, forceUpdate}) => {
             setDuration(hours + ':' + minutes)
         })
     }, [user, date, forceUpdate])
+
+    useEffect(() => {
+        sendEvents(events)
+    }, [events, sendEvents])
 
     return (
         <div className='event-list'>
