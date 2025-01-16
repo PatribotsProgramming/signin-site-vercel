@@ -4,9 +4,9 @@ import { useContext, useEffect, useState } from 'react'
 import { getData } from '../utils/firebaseConfig.js'
 
 const EventList = ({date, user, forceUpdate}) => {
-    const [events, setEvents] = useState([])
-    const [duration, setDuration] = useState('0:0:0')
-    const [studentList, parentList] = useContext(AppContext)
+    const [events, setEvents] = useState([]);
+    const [duration, setDuration] = useState('0:0:0');
+    const [studentList, parentList] = useContext(AppContext);
 
     function toTitleCase(str) {
         return str.replace(/\w\S*/g, function (txt) {
@@ -31,7 +31,6 @@ const EventList = ({date, user, forceUpdate}) => {
             const yearData = nameData?.[year]
             const monthData = yearData?.[month]
             const dayData = monthData?.[day]
-            console.log(dayData);
             // The data looks like this:
             // 0: { in: "8:00", out: "12:00" }
             // 1: { in: "13:00", out: "17:00" }
