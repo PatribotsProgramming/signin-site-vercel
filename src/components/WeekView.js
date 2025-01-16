@@ -38,8 +38,9 @@ const getWeekDates = (currentDate) => {
     const firstDayOfWeek = currentDate.getDate() - currentDate.getDay(); // Get the first day of the current week (Sunday)
 
     for (let i = 0; i < 7; i++) {
-        const date = new Date(currentDate.setDate(firstDayOfWeek + i));
-        weekDates.push(date.getDate());
+        const dateCopy = new Date(currentDate);
+        dateCopy.setDate(firstDayOfWeek + i);
+        weekDates.push(dateCopy.getDate());
     }
 
     return weekDates;
