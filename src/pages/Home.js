@@ -9,8 +9,7 @@ import { getData, setData } from '../utils/firebaseConfig.js'
 function Home() {
     const [studentNames, setStudentNames] = useState([])
     const [parentNames, setParentNames] = useState([])
-    const [studentWhitelist, parentWhitelist] = useContext(AppContext);
-    const [studentHashmap, setStudentHashmap] = useState([{}])
+    const [studentWhitelist, parentWhitelist, studentHashmap] = useContext(AppContext);
     const [isLoading, setIsLoading] = useState(true)
     const [recentActivityState, setRecentActivityState] = useState('')
     const groupNames = [

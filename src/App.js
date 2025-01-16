@@ -12,6 +12,7 @@ function App() {
     const [appState, setAppState] = useState('login')
     const [studentWhitelist, setStudentWhitelist] = useState([])
     const [parentWhitelist, setParentWhitelist] = useState([])
+    const [studentHashmap, setStudentHashmap] = useState({})
 
     useEffect(() => {
         fetch(process.env.REACT_APP_GET_SHEET_DATA, { method: 'GET' })
@@ -31,9 +32,10 @@ function App() {
 
                 const jsonRange = json.valueRanges[2].values;
                 
-                const studentNames = cleanNames(jsonRange.map((row) => [row[0]]));
+                const studentNames = cleanNames(jsonRange.map((row) => row[0]));
                 setStudentWhitelist(studentNames);
-
+                setStudentHashmap(Object.fromEntries(jsonRange.map(([name, group]) => [name, group])));
+                
                 const parentNames = cleanNames(jsonRange.map((row) => row.slice(2, 8)));
                 setParentWhitelist(parentNames);
             });
@@ -44,7 +46,7 @@ function App() {
     }
 
     return (
-        <AppContext.Provider value={[ studentWhitelist, parentWhitelist ]}>
+        <AppContext.Provider value={[ studentWhitelist, parentWhitelist, studentHashmap ]}>
             <div>
                 {appState === 'NOTlogin' ? (
                     <LoginPage onLogin={onLogin} />
