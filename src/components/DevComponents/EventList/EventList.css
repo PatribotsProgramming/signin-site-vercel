@@ -1,11 +1,18 @@
 .event-list {
     color: white;
+    border: 0.1vw solid rgba(255, 255, 255, 0.74);
+    border-radius: 0.26vw;
+    padding: 0.26vw; 
+    margin: 0.26vw; 
+    background: rgba(0, 0, 0, 0.3);
+    justify-content: center;
 }
 
 .event {
-    border-radius: 5px;
+    border-radius: 0.26vw;
     text-align: center;
-    padding: 5px;
+    padding: 0.26vw;
+    
 }
 
 .in {
@@ -18,7 +25,18 @@
 
 .total {
     display: flex;
-    gap: .3rem;
+    gap: 0.5vw; 
+    border-radius: 0.26vw;
+    padding: 0.6vw; 
+    margin: 0.25vw;
+    background: rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+}
+
+.total h5 {
+    margin: 0;
+    padding: 0;
 }
 
 .duration {
@@ -26,10 +44,9 @@
 }
 
 .event-list-container {
-    min-height: 200px; /* fits four events */
-    max-height: 200px;
+    min-height: 23vh; /* Fits four events at 1080p */
+    max-height: 23vh;
     overflow-y: auto;
     list-style: none;
     padding: 0;
-    margin: 0;
 }
