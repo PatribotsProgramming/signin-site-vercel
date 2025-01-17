@@ -1,7 +1,7 @@
 import './EventList.css'
-import { AppContext } from '../App.js'
+import { AppContext } from '../../../App.js'
 import { useContext, useEffect, useState } from 'react'
-import { getData } from '../utils/firebaseConfig.js'
+import { getData } from '../../../utils/firebaseConfig.js'
 
 const EventList = ({date, user, forceUpdate, sendEvents }) => {
     const [events, setEvents] = useState([]);

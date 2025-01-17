@@ -1,7 +1,7 @@
 import './EventManager.css'
-import './ErrorList.css'
+import '../ErrorList/ErrorList.css'
 import { useEffect, useState } from 'react'
-import { getData } from '../utils/firebaseConfig.js'
+import { getData } from '../../../utils/firebaseConfig.js'
 
 function EventManager(input, isStudent = true) {
     const [events, setEvents] = useState([])

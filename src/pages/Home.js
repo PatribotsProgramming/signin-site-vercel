@@ -1,6 +1,6 @@
 import { React, useState, useEffect, useContext } from 'react'
 import { AppContext } from '../App.js'
-import AutoComplete from '../components/AutoComplete.js'
+import AutoComplete from '../components/AutoComplete/AutoComplete.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Home.css'
 import '../Loader.css'

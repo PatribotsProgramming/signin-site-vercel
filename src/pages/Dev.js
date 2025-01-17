@@ -1,8 +1,8 @@
 import { useState, useContext} from 'react'
 import { AppContext } from '../App.js'
-import AutoComplete from '../components/AutoComplete.js'
-import EventManager from '../components/EventManager.js'
-import ErrorList from '../components/ErrorList.js'
+import AutoComplete from '../components/AutoComplete/AutoComplete.js'
+import EventManager from '../components/DevComponents/EventManager/EventManager.js'
+import ErrorList from '../components/DevComponents/ErrorList/ErrorList.js'
 import './Dev.css'
 import { getData, setData } from '../utils/firebaseConfig.js'
 
