@@ -197,11 +197,11 @@ function Home() {
                     />
                 </form>
             </div>
-            <div className="px-3 text-center text-light students user-select-none">
+            <div className="px-0 text-center text-light students user-select-none">
                 <h3>
                     {isLoading || studentNames.length === 0 ? ' ' : 'Students:'}
                 </h3>
-                <div className="names d-flex flex-wrap">
+                <div className="names d-flex flex-nowrap">
                     {/* Loop over each group (Build, Design, etc) */}
                     {groupNames.map((groupName) => {
                         const namesInGroup = Object.entries(
@@ -240,13 +240,13 @@ function Home() {
                 </div>
                 <span className="loader"></span>
             </div>
-            <div className="px-3 text-center text-light mentors user-select-none">
+            <div className="px-0 text-center text-light mentors user-select-none">
                 <h3>
                     {isLoading || parentNames.length === 0
                         ? ' '
                         : 'Parents/Mentors:'}
                 </h3>
-                <div className="names group row">
+                <div className="names group row flex-wrap">
                     {parentNames.map((name) => (
                         <div
                             className="px-3 text-nowrap text-light name col-md-6"

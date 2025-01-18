@@ -98,10 +98,9 @@ input:focus {
 .names {
     position: relative;
     transition: border 0.2s ease-in;
-
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+    overflow-x: auto;
 }
 
 .names::before,
