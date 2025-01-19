@@ -11,8 +11,8 @@ const DateSelector = ({onSubmit}) => {
         return new Date(year, month + 1, 0).getDate();
     };
 
-    const onClick = (day) => {
-        const newDate = new Date(year, month, day);
+    const onClick = (day, monthOffset = 0) => {
+        const newDate = new Date(year, month + monthOffset, day);
         setCurrentDate(newDate);
         onSubmit(newDate);
     }
@@ -23,12 +23,14 @@ const DateSelector = ({onSubmit}) => {
         onSubmit(newDate);
     }
 
-    const pushDay = (days, day) => {
+    const pushDay = (days, day, monthOffset = 0, className = '') => {
+        const today = new Date(Date.now()).getDate();
+        const isToday = day === today && monthOffset === 0;
         days.push(
-            <td key={day}>
+            <td key={`${monthOffset}-${day}`}>
                 <button
-                    className={`day-button ${day === currentDate.getDate() ? 'selected' : ''}`}
-                    onClick={() => onClick(day)}
+                    className={`day-button ${className} ${day === currentDate.getDate() && monthOffset === 0 ? 'selected' : ''} ${isToday ? 'today' : ''}`}
+                    onClick={() => onClick(day, monthOffset)}
                 >
                     {day}
                 </button>
@@ -43,12 +45,13 @@ const DateSelector = ({onSubmit}) => {
         const weeks = [];
         let days = [];
 
-        // Fill the first row with empty cells until the first day of the month
-        for (let i = 0; i < firstDay; i++) {
-            days.push(<td key={`empty-${i}`}></td>);
+        // Fill the first row with days from the previous month
+        const prevMonthDays = getDaysInMonth(month - 1, year);
+        for (let i = firstDay - 1; i >= 0; i--) {
+            pushDay(days, prevMonthDays - i, -1, 'other-month');
         }
 
-        // Fill the calendar with days of the month
+        // Fill the calendar with days of the current month
         for (let day = 1; day <= daysInMonth; day++) {
             pushDay(days, day);
 
@@ -59,13 +62,12 @@ const DateSelector = ({onSubmit}) => {
             }
         }
 
-        // Fill the last row with empty cells if necessary
-        if (days.length > 0) {
-            while (days.length < 7) {
-                days.push(<td key={`empty-${days.length}`}></td>);
-            }
-            weeks.push(<tr key={`week-${weeks.length}`}>{days}</tr>);
+        // Fill the last row with days from the next month
+        let nextMonthDay = 1;
+        while (days.length < 7) {
+            pushDay(days, nextMonthDay++, 1, 'other-month');
         }
+        weeks.push(<tr key={`week-${weeks.length}`}>{days}</tr>);
 
         return weeks;
     };

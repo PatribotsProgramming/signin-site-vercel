@@ -21,7 +21,7 @@ td {
 }
 
 .day-button {
-    border-radius: 20%;
+    border-radius: 40%;
     background-color: rgb(185, 222, 255);
     border: none;
     min-width: 100%;
@@ -33,7 +33,16 @@ td {
 }
 
 .selected {
-    background-color: rgb(45, 156, 253);
+    background-color: rgb(0, 136, 255);
+}
+
+.today {
+    background-color: rgb(185, 255, 213);
+    color: black;
+}
+
+.other-month {
+    opacity: 0.5;
 }
 
 .hoverable:hover {
