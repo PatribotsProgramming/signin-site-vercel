@@ -3,7 +3,7 @@ import { AppContext } from '../App.js'
 import AutoComplete from '../components/AutoComplete/AutoComplete.js'
 import EventManager from '../components/DevComponents/EventManager/EventManager.js'
 import ErrorList from '../components/DevComponents/ErrorList/ErrorList.js'
-import './Dev3.css'
+import './DevOld.css'
 import { getData, setData } from '../utils/firebaseConfig.js'
 
 function DevOld() {
