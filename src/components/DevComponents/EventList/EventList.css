@@ -23,6 +23,10 @@
     background: rgba(138, 94, 181, 0.336);
 }
 
+.currently-signed-in {
+    background: rgba(101, 255, 101, 0.336);
+}
+
 .total {
     display: flex;
     gap: 0.5vw; 

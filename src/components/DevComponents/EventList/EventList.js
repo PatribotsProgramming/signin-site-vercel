@@ -16,6 +16,15 @@ const EventList = ({ date, user, forceUpdate, sendEvents }) => {
         })
     }
 
+    const calculateDurationToNow = (inTime) => {
+        const inTimeMs = new Date(inTime).getTime();
+        const currentTimeMs = new Date().getTime();
+        const durationMs = currentTimeMs - inTimeMs;
+        const hours = Math.floor(durationMs / 3600000);
+        const minutes = Math.floor((durationMs % 3600000) / 60000).toString().padStart(2, '0');
+        return `${hours}:${minutes}`;
+    };
+
     useEffect(() => {
         const data = getData()
         let name = user
@@ -48,7 +57,7 @@ const EventList = ({ date, user, forceUpdate, sendEvents }) => {
                 const dayData = monthData?.[currentDay];
 
                 if (dayData === undefined) continue;
-
+                let formattedDuration;
                 const eventDataWithoutDurationAndSignedIn = Object.entries(dayData)
                     .filter(([key]) => key !== 'duration' && key !== 'signedIn')
                     .map(([_, value]) => {
@@ -61,15 +70,22 @@ const EventList = ({ date, user, forceUpdate, sendEvents }) => {
                             }
                         )
                         const inTime = formatTime(value.in)
-                        const outTime = formatTime(value.out)
+                        let outTime = formatTime(value.out)
+                        if (!value.out) {
+                            outTime = "Currently Signed In"
+                            if (!value.out) {
+                                outTime = "Currently Signed In";
+                                formattedDuration = calculateDurationToNow(value.in);
+                            }
+                        }
                         return [
                             { state: 'In', time: inTime },
                             { state: 'Out', time: outTime },
                         ]
                     })
                     .flat();
-
-                const formattedDuration = dayData?.duration.split(':').slice(0, 2).map((unit, index) => index === 1 ? unit.padStart(2, '0') : unit).join(':');
+                if (!formattedDuration)
+                    formattedDuration = dayData?.duration.split(':').slice(0, 2).map((unit, index) => index === 1 ? unit.padStart(2, '0') : unit).join(':');
                 if (currentDay === day && currentMonth === month) {
                     todaysEventsTemp = eventDataWithoutDurationAndSignedIn;
                     todaysDuration = formattedDuration;
@@ -96,15 +112,19 @@ const EventList = ({ date, user, forceUpdate, sendEvents }) => {
         <div className='event-list'>
             <h3>Events</h3>
             <ul className='event-list-container'>
-                {todaysEvents && todaysEvents.map((event, index) => (
-                    <p className={`event ${event.state.toLowerCase()}`} key={index}>
-                        {event.state} - {event.time}
-                    </p>
-                ))}
+                {todaysEvents && todaysEvents.map((event, index) => {
+                    const eventClass = event.time === "Currently Signed In" ? 'currently-signed-in' : event.state.toLowerCase();
+                    const eventText = event.time === "Currently Signed In" ? event.time : `${event.state} - ${event.time}`;
+                    return (
+                        <p className={`event ${eventClass}`} key={index}>
+                            {eventText}
+                        </p>
+                    );
+                })}
             </ul>
             <div className='total'>
                 <h5>Daily Hours: </h5>
-                <h5 className='duration'>{duration} </h5>
+                <h5 className='duration'>{duration}</h5>
             </div>
         </div>
     )
