@@ -8,44 +8,60 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* border: solid 2px black; */
     position: sticky;
     top: 0;
     background-color: inherit;
     z-index: 1;
+    grid-template-columns: repeat(7, 1fr);
+    height: 10vh;
 }
 
 .week-view-grid-header > div {
     width: 100%;
     text-align: center;
     padding: 1.5vh 4.5vw;
-    
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .week-view-grid-item {
-    border-right: solid 2px rgba(255, 255, 255, 0.25);
-    border-bottom: solid 2px rgba(255, 255, 255, 0.25);
+    border: solid 2px rgba(255, 255, 255, 0.25);
+    border-left: none;
+    border-top: none;
     text-align: center;
-    min-height: 6.05vh;
+}
+
+.no-right-border {
+    border-right: none;
+}
+
+.no-bottom-border {
+    border-bottom: none;
 }
 
 .week-view-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    /* position: relative; */
+    grid-auto-rows: 10vh;
+    height: 100%;
     /* border: solid 2px black; */
-    /* width: 25px; */
 }
-
 
 .week-view-grid-container {
     display: flex;
-    /* justify-content: center;
-    align-items: center;  */
-    /* border: solid 2px blue; */
     overflow: auto;
-    max-height: 95vh;
+    position: relative;
+    height: 95vh;
+    grid-template-columns: 5rem 1fr;
+    grid-gap: 0;
+    overflow-y: auto;
+    /* border: solid 2px blue; */
 }
+
+.week-view-grid-container :last-child {
+    flex: 1;
+}
+
+
 
 .no-bottom-border {
     border-bottom: transparent;
@@ -56,18 +72,40 @@
 }
 
 .times-header {
-    margin: 83px 10px;
-    width: 60px;
+    margin-bottom: 4vh;
+    align-self: right;
+    width: 3.64vw;
     text-align: right;
-    position: relative;
     white-space: nowrap;
     text-overflow: ellipsis;
-    /* display: flex; */
-    /* border: solid 2px limegreen; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: right;
+    height: 100%;
+    background-color: inherit;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    justify-content: space-between;
 }
 
-
 .times-header > div {
-    margin: 3vh 0;
-    /* border: solid 2px black; */
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 10vh;
+    min-height: 10vh;
+  }
+
+.times-spacer {
+    height: 15vh;
+}
+
+.time {
+    /* height: 100vh; */
+    display: flex;
+    align-items: center;
+    padding-right: 0.5rem;
 }
