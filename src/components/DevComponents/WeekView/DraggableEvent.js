@@ -33,7 +33,7 @@ const interpolateGradient = (gradient, value) => {
                   parseInt(result[2], 16),
                   parseInt(result[3], 16),
               ]
-            : null;
+            : [0,0,0];
     }
 
     function rgbToHex(r, g, b) {
@@ -72,28 +72,40 @@ const calculateEventPosition = (startTime, endTime, date) => {
 };
 
 const DraggableEvent = ({ event }) => {
-    const { top, height, left, duration } = calculateEventPosition(event.in, event.out, event.date);
+    let currentlySignedIn = false;
+
+    const currentTime = new Date().toLocaleTimeString('en-US', {
+        hour12: true,
+        hour: '2-digit',
+        minute: '2-digit',
+    });
+    if (event.out === "Currently Signed In") {
+        currentlySignedIn = true;
+    }
+
+    const { top, height, left, duration } = calculateEventPosition(event.in, currentlySignedIn ? currentTime : event.out, event.date);
     const colors = ['#833ab4', '#74b9ff', '#01daba'];
     const lowerColor = interpolateGradient(colors, top / 2.1);
-    const upperColor = interpolateGradient(colors, (top+height) / 2.1);
+    const upperColor = currentlySignedIn ? "#00c36e" : interpolateGradient(colors, (top + height) / 2.1);
     const color = `linear-gradient(${lowerColor}, ${upperColor})`;
 
     const fontSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('font-size'));
     const heightPx = (height / 100) * window.innerHeight;
+
     return (
         <div
             className="event draggable"
             style={{
                 top: `${top}vh`,
                 height: `${height}vh`,
-                background: `${color}`,
-                left: `calc(${left}% + (var(--row-width) * 0.05))`
+                background: color,
+                left: `calc(${left}% + (var(--row-width) * 0.05))`,
             }}
         >
             {heightPx > 2.25 * fontSize && (
                 <>
                     <div className="event-time-top">{event.in}</div>
-                    <div className="event-time-bottom">{event.out}</div>
+                    <div className="event-time-bottom">{currentlySignedIn ? "Now" : event.out}</div>
                 </>
             )}
         </div>
