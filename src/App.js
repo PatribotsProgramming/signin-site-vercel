@@ -1,5 +1,5 @@
 import Home from './pages/Home'
-import Dev from './pages/Dev'
+import DevOld from './pages/Dev3'
 import Dev2 from './pages/Dev2'
 import LoginPage from './pages/LoginPage'
 
@@ -54,8 +54,8 @@ function App() {
                     <BrowserRouter>
                         <Routes>
                             <Route path="/" element={<Home />} />
-                            <Route path="/Dev" element={<Dev />} />
-                            <Route path="/Dev2" element={<Dev2 />} />
+                            <Route path="/Dev" element={<Dev2 />} />
+                            <Route path="/Dev2" element={<DevOld />} />
                             <Route path="*" element={<h1>404</h1>} />
                         </Routes>
                     </BrowserRouter>

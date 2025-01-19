@@ -3,10 +3,10 @@ import { AppContext } from '../App.js'
 import AutoComplete from '../components/AutoComplete/AutoComplete.js'
 import EventManager from '../components/DevComponents/EventManager/EventManager.js'
 import ErrorList from '../components/DevComponents/ErrorList/ErrorList.js'
-import './Dev.css'
+import './Dev3.css'
 import { getData, setData } from '../utils/firebaseConfig.js'
 
-function Dev() {
+function DevOld() {
     const [studentWhitelist, parentWhitelist] = useContext(AppContext);
 
     let inputName = ''
@@ -245,4 +245,4 @@ function Dev() {
     )
 }
 
-export default Dev
+export default DevOld
