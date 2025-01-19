@@ -1,3 +1,8 @@
+:root {
+    --row-height: 10vh;
+    --row-width: calc(100% / 7);
+}
+
 .week-view {
     color: white;
     margin-right: 1.2rem;
@@ -13,7 +18,7 @@
     background-color: inherit;
     z-index: 1;
     grid-template-columns: repeat(7, 1fr);
-    height: 10vh;
+    height: var(--row-height);
 }
 
 .week-view-grid-header > div {
@@ -41,8 +46,9 @@
 .week-view-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-auto-rows: 10vh;
+    grid-auto-rows: var(--row-height);
     height: 100%;
+    position: relative;
     /* border: solid 2px black; */
 }
 
@@ -53,15 +59,12 @@
     height: 95vh;
     grid-template-columns: 5rem 1fr;
     grid-gap: 0;
-    overflow-y: auto;
     /* border: solid 2px blue; */
 }
 
 .week-view-grid-container :last-child {
     flex: 1;
 }
-
-
 
 .no-bottom-border {
     border-bottom: transparent;
@@ -72,8 +75,6 @@
 }
 
 .times-header {
-    margin-bottom: 4vh;
-    align-self: right;
     width: 3.64vw;
     text-align: right;
     white-space: nowrap;
@@ -81,7 +82,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: right;
     height: 100%;
     background-color: inherit;
     position: sticky;
@@ -95,12 +95,12 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    height: 10vh;
-    min-height: 10vh;
-  }
+    height: var(--row-height);
+    min-height: var(--row-height);
+}
 
 .times-spacer {
-    height: 15vh;
+    height: calc(var(--row-height) * 1.5);
 }
 
 .time {
@@ -108,4 +108,33 @@
     display: flex;
     align-items: center;
     padding-right: 0.5rem;
+}
+
+.draggable {
+    position: absolute;
+    width: calc(var(--row-width) * 0.9);
+    border-radius: 5px;
+    padding: 5px;
+    border: 2px solid aliceblue;
+    cursor: pointer;
+}
+
+.draggable:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.draggable > div {
+    position: absolute;
+    cursor: ns-resize;
+    right: 0;
+    left: 0;
+    user-select: none;
+}
+
+.event-time-bottom {
+    bottom: 0;
+}
+
+.event-time-top {
+    top: 0;
 }

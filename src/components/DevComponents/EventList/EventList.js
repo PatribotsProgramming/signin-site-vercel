@@ -3,8 +3,9 @@ import { AppContext } from '../../../App.js'
 import { useContext, useEffect, useState } from 'react'
 import { getData } from '../../../utils/firebaseConfig.js'
 
-const EventList = ({date, user, forceUpdate, sendEvents }) => {
-    const [events, setEvents] = useState([]);
+const EventList = ({ date, user, forceUpdate, sendEvents }) => {
+    const [todaysEvents, setTodaysEvents] = useState([]);
+    const [weekEvents, setWeekEvents] = useState([]);
 
     const [duration, setDuration] = useState('0:0:0');
     const [studentList, parentList] = useContext(AppContext);
@@ -22,66 +23,80 @@ const EventList = ({date, user, forceUpdate, sendEvents }) => {
         name = toTitleCase(name)
         
         let year = date.getFullYear();
-        let month = date.getMonth()+1;
+        let month = date.getMonth() + 1;
         let day = date.getDate();
-        
+        let weekStart = new Date(date);
+        weekStart.setDate(day - date.getDay());
+
         data?.then((data) => {
             const isStudent = studentList.includes(name);
             const eventData = isStudent ? data?.Students : data?.Parents
             const nameData = eventData?.[name]
             const yearData = nameData?.[year]
-            const monthData = yearData?.[month]
-            const dayData = monthData?.[day]
-            // The data looks like this:
-            // 0: { in: "8:00", out: "12:00" }
-            // 1: { in: "13:00", out: "17:00" }
-            // ...
-            // duration: "8:0:0"
-            // signedIn: false
-            if (dayData === undefined) {
-                setEvents([])
-                setDuration('0:00')
-                return
+
+            const weekEventsTemp = [];
+            let todaysEventsTemp = [];
+            let todaysDuration = '0:00';
+
+            for (let i = 0; i < 7; i++) {
+                const currentDate = new Date(weekStart);
+                currentDate.setDate(weekStart.getDate() + i);
+                const currentDay = currentDate.getDate();
+                const currentMonth = currentDate.getMonth() + 1;
+
+                const monthData = yearData?.[currentMonth];
+                const dayData = monthData?.[currentDay];
+
+                if (dayData === undefined) continue;
+
+                const eventDataWithoutDurationAndSignedIn = Object.entries(dayData)
+                    .filter(([key]) => key !== 'duration' && key !== 'signedIn')
+                    .map(([_, value]) => {
+                        const formatTime = (time) => new Date(time).toLocaleTimeString(
+                            'en-US',
+                            {
+                                hour12: true,
+                                hour: '2-digit',
+                                minute: '2-digit',
+                            }
+                        )
+                        const inTime = formatTime(value.in)
+                        const outTime = formatTime(value.out)
+                        return [
+                            { state: 'In', time: inTime },
+                            { state: 'Out', time: outTime },
+                        ]
+                    })
+                    .flat();
+
+                const formattedDuration = dayData?.duration.split(':').slice(0, 2).map((unit, index) => index === 1 ? unit.padStart(2, '0') : unit).join(':');
+                if (currentDay === day && currentMonth === month) {
+                    todaysEventsTemp = eventDataWithoutDurationAndSignedIn;
+                    todaysDuration = formattedDuration;
+                }
+
+                weekEventsTemp.push({
+                    date: currentDate,
+                    events: eventDataWithoutDurationAndSignedIn,
+                    duration: formattedDuration,
+                });
             }
 
-            const eventDataWithoutDurationAndSignedIn = Object.entries(dayData)
-                .filter(([key]) => key !== 'duration' && key !== 'signedIn')
-                .map(([_, value]) => {
-                    const formatTime = (time) => new Date(time).toLocaleTimeString(
-                        'en-US',
-                        {
-                            hour12: true,
-                            hour: '2-digit',
-                            minute: '2-digit',
-                        }
-                    )
-                    const inTime = formatTime(value.in)
-                    const outTime = formatTime(value.out)
-                    return [
-                        { state: 'In', time: inTime },
-                        { state: 'Out', time: outTime },
-                    ]
-                })
-                .flat()
-            setEvents(eventDataWithoutDurationAndSignedIn)
-
-            let hours = dayData?.duration.split(':')[0]
-            let minutes = dayData?.duration.split(':')[1]
-            // if mins is less than 10, add a 0 at end
-            minutes = minutes.toString().padStart(2, '0');
-            setDuration(hours + ':' + minutes)
+            setTodaysEvents(todaysEventsTemp);
+            setDuration(todaysDuration);
+            setWeekEvents(weekEventsTemp);
         })
     }, [user, date, forceUpdate])
 
     useEffect(() => {
-        sendEvents(events)
-    }, [events, sendEvents])
+        sendEvents(weekEvents)
+    }, [weekEvents, sendEvents])
 
     return (
         <div className='event-list'>
             <h3>Events</h3>
             <ul className='event-list-container'>
-                {events && events.map((event, index) => (
+                {todaysEvents && todaysEvents.map((event, index) => (
                     <p className={`event ${event.state.toLowerCase()}`} key={index}>
                         {event.state} - {event.time}
                     </p>
@@ -93,7 +108,6 @@ const EventList = ({date, user, forceUpdate, sendEvents }) => {
             </div>
         </div>
     )
-
 }
 
 export default EventList
