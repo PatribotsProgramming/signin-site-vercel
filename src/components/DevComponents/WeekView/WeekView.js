@@ -84,9 +84,13 @@ const WeekView = ({ date, user, weekEvents }) => {
                 </div>
                 <div>
                     <div className="week-view-grid-header">
-                        {weekDays.map((day, index) => (
-                            <div key={index}>{day}<br key={index} />{weekDates[index]}</div>
-                        ))}
+                        {weekDays.map((day, index) => {
+                            const isSelected = weekDates[index] === date.getDate();
+                            const className = isSelected ? 'selected' : '';
+                            return (
+                                <div key={index} className={className}>{day}<br key={index} />{weekDates[index]}</div>
+                            );
+                        })}
                     </div>
                     <div className="week-view-grid">
                         {gridItems}

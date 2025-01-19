@@ -9,6 +9,14 @@
     width: 98%;
 }
 
+.week-view-grid-header .selected {
+    background-color: rgba(0, 196, 206, 0.6) !important;
+}
+
+.week-view-grid-header :hover{
+    border: 2px solid aliceblue;
+}
+
 .week-view-grid-header {
     display: flex;
     justify-content: center;
@@ -22,9 +30,11 @@
 }
 
 .week-view-grid-header > div {
-    width: 100%;
+    border-radius: 1vw;
+    border: 2px solid transparent;
+    width: var(--row-width);
     text-align: center;
-    padding: 1.5vh 4.5vw;
+    padding: 1.5vh calc(4.5vw - 2px); /* make room for the border */
     background-color: rgba(255, 255, 255, 0.1);
 }
 
