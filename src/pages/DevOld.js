@@ -245,4 +245,4 @@ function DevOld() {
     )
 }
 
-export default DevOld
+export default DevOld;
