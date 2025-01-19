@@ -85,7 +85,7 @@ const WeekView = ({ date, user, weekEvents }) => {
                 <div>
                     <div className="week-view-grid-header">
                         {weekDays.map((day, index) => (
-                            <div key={index}>{day}<br />{weekDates[index]}</div>
+                            <div key={index}>{day}<br key={index} />{weekDates[index]}</div>
                         ))}
                     </div>
                     <div className="week-view-grid">

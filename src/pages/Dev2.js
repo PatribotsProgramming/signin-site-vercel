@@ -125,7 +125,7 @@ function Dev() {
             </aside>
             <main className="main-content">
                 {/* <Header date={selectedDate} /> */}
-                <WeekView date={selectedDate} user={selectedName} events={eventList} />
+                <WeekView date={selectedDate} user={selectedName} weekEvents={eventList} />
             </main>
         </div>
     )

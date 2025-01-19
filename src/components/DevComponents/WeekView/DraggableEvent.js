@@ -78,6 +78,8 @@ const DraggableEvent = ({ event }) => {
     const upperColor = interpolateGradient(colors, (top+height) / 2.1);
     const color = `linear-gradient(${lowerColor}, ${upperColor})`;
 
+    const fontSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('font-size'));
+    const heightPx = (height / 100) * window.innerHeight;
     return (
         <div
             className="event draggable"
@@ -88,8 +90,12 @@ const DraggableEvent = ({ event }) => {
                 left: `calc(${left}% + (var(--row-width) * 0.05))`
             }}
         >
-            <div className="event-time-top">{event.in}</div>
-            <div className="event-time-bottom">{event.out}</div>
+            {heightPx > 2.25 * fontSize && (
+                <>
+                    <div className="event-time-top">{event.in}</div>
+                    <div className="event-time-bottom">{event.out}</div>
+                </>
+            )}
         </div>
     );
 };
