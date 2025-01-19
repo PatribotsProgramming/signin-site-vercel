@@ -115,10 +115,13 @@ const WeekView = ({ date, user, events }) => {
     return (
         <div className="week-view">
             <div className="week-view-grid-container">
-                <div className='times-header'>
-                    {timeSlots.map((time, index) => (
-                        <div className='time' key={index}>{time}</div>
-                    ))}
+                <div>
+                    <div className='times-spacer' />
+                    <div className='times-header'>
+                        {timeSlots.map((time, index) => (
+                            <div className='time' key={index}>{time}</div>
+                        ))}
+                    </div>
                 </div>
                 <div>
                     <div className="week-view-grid-header">
