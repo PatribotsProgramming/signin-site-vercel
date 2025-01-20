@@ -21,10 +21,6 @@
         display: none;
     }
 
-    .sidebar {
-        margin: 20vw;
-    }
-
     .calendar-container {
         justify-content: center;
     }

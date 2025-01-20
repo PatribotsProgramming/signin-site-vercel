@@ -42,13 +42,13 @@ function App() {
     }, []);
 
     const onLogin = function (key) {
-        if (key === process.env.REACT_APP_LOGIN_PASSWORD) setAppState('chat')
+        if (key === process.env.REACT_APP_LOGIN_PASSWORD) setAppState('app')
     }
 
     return (
         <AppContext.Provider value={[ studentWhitelist, parentWhitelist, studentHashmap ]}>
             <div>
-                {appState === 'NOTlogin' ? (
+                {appState === 'login' ? (
                     <LoginPage onLogin={onLogin} />
                 ) : (
                     <BrowserRouter>

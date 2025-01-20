@@ -3,6 +3,9 @@
     max-width: min-content;
     user-select: none;
     height: calc(1.2rem * 11.5);
+    @media (max-width: 768px) {
+        height: calc(1.2rem * 7.5);
+    }
 }
 
 table {
@@ -18,6 +21,10 @@ td {
     min-width: 0.265vw;
     text-align: center;
     padding: .12vw;
+    @media (max-width: 768px) {
+        font-size: 0.75rem;
+        max-width: calc(20% / 7);
+    }
 }
 
 .day-button {
