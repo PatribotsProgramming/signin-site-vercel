@@ -1,14 +1,12 @@
-@import url('https://fonts.googleapis.com/css?family=Space%20Grotesk:700|Space%20Grotesk:400');
-
 :root {
     /*  change this for scaling  */
     --m: 1rem;
     --scale: -.8%;
     --size: 400%;
+
     --colorOne: #ec21ff94;
     --colorTwo: #21D4FD94;
     --colorThree: #3b4fff94;
-
 }
 
 .draggable::before {
