@@ -1,7 +1,6 @@
-import Home from './pages/Home'
-import Dev from './pages/Dev'
-import DevOld from './pages/DevOld'
-import LoginPage from './pages/LoginPage'
+import Home from './pages/Home/Home.js'
+import Dev from './pages/Dev/Dev.js'
+import LoginPage from './pages/Login/LoginPage.js'
 
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
 import { createContext, useState, useEffect } from 'react'
@@ -55,7 +54,6 @@ function App() {
                         <Routes>
                             <Route path="/" element={<Home />} />
                             <Route path="/Dev" element={<Dev />} />
-                            <Route path="/Dev2" element={<DevOld />} />
                             <Route path="*" element={<h1>404</h1>} />
                         </Routes>
                     </BrowserRouter>

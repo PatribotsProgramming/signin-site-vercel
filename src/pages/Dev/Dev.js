@@ -1,13 +1,13 @@
 import { useState, useContext } from 'react'
-import { AppContext } from '../App.js'
-import AutoComplete from '../components/AutoComplete/AutoComplete.js'
-import EventList from '../components/DevComponents/EventList/EventList.js'
+import { AppContext } from '../../App.js'
+import AutoComplete from '../../components/AutoComplete/AutoComplete.js'
+import EventList from '../../components/DevComponents/EventList/EventList.js'
 import './Dev.css'
-import './DevOld.css'
-import { getData, setData } from '../utils/firebaseConfig.js'
-import DateSelector from '../components/DevComponents/DateSelector/DateSelector.js'
-import DurationChanger from '../components/DurationChanger.js'
-import WeekView from '../components/DevComponents/WeekView/WeekView.js'
+import './FancyDraggable.css'
+import { getData, setData } from '../../utils/firebaseConfig.js'
+import DateSelector from '../../components/DevComponents/DateSelector/DateSelector.js'
+import DurationChanger from '../../components/DurationChanger.js'
+import WeekView from '../../components/DevComponents/WeekView/WeekView.js'
 
 function Dev() {
     const [studentWhitelist, parentWhitelist] = useContext(AppContext);

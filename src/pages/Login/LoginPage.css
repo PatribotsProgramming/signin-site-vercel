@@ -1,0 +1,14 @@
+.login-page-container {
+    margin: 10vh 30vw;
+    font-size: 1.125rem;
+    text-align: center;
+    @media screen and (max-width: 768px) {
+        margin: 10vh 15vw;
+    }
+}
+
+.login-page-container h4 {
+    color: white;
+    font-size: 2rem;
+    padding-bottom: 1.5vh;
+}

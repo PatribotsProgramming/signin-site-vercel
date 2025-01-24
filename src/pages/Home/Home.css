@@ -148,20 +148,6 @@ input:focus {
     transform: translateY(-50%);
 }
 
-/* 
-.name:hover, .group:hover {
-	cursor: pointer;
-}
-
-.name span span:hover {
-  color: rgba(255, 255, 255, 0.3);
-}
-
-.name span span:hover::before {
-  width: 100%;
-} 
-*/
-
 .students {
     position: absolute;
     top: 30%;

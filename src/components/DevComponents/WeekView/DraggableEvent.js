@@ -91,7 +91,7 @@ const DraggableEvent = ({ event }) => {
 
     const fontSize = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('font-size'));
     const heightPx = (height / 100) * window.innerHeight;
-
+    
     return (
         <div
             className="event draggable"
@@ -100,6 +100,7 @@ const DraggableEvent = ({ event }) => {
                 height: `${height}vh`,
                 background: color,
                 left: `calc(${left}% + (var(--row-width) * 0.05))`,
+                '--random-delay': Math.random() * 4,
             }}
         >
             {heightPx > 2.25 * fontSize && (

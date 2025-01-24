@@ -1,10 +1,10 @@
 import { React, useState, useEffect, useContext } from 'react'
-import { AppContext } from '../App.js'
-import AutoComplete from '../components/AutoComplete/AutoComplete.js'
+import { AppContext } from '../../App.js'
+import AutoComplete from '../../components/AutoComplete/AutoComplete.js'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './Home.css'
-import '../Loader.css'
-import { getData, setData } from '../utils/firebaseConfig.js'
+import './Loader.css'
+import { getData, setData } from '../../utils/firebaseConfig.js'
 
 function Home() {
     const [studentNames, setStudentNames] = useState([])
