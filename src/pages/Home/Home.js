@@ -213,7 +213,11 @@ function Home() {
                                                 className="px-3 text-nowrap text-light name"
                                                 key={name}
                                             >
-                                                <span>{name}</span>
+                                                <span>
+                                                    {name === 'Aidan Betschart'
+                                                        ? '🐺 Aidan Betschart 🐺'
+                                                        : name}
+                                                </span>
                                             </div>
                                         ))}
                                     </div>
