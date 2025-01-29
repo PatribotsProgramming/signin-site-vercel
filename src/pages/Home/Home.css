@@ -2,6 +2,13 @@
     --left: 65%;
 }
 
+.instructions, .login h1 {
+    text-align: center;
+    color: #ebf9ff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+}
+
 .instructions {
     position: absolute;
     top: 0%;
@@ -9,12 +16,7 @@
     left: 50%;
     transform: translateX(-50%);
     width: 100%;
-    text-align: center;
     font-size: 1.5rem;
-    color: #ebf9ff;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    letter-spacing: 1px;
-    text-align: center;
 }
 
 .activity-state {
@@ -42,26 +44,20 @@
     cursor: default;
 }
 
-.login h1 {
-    color: #ebf9ff;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    letter-spacing: 1px;
-    text-align: center;
+.student-side, .parent-side {
+    position: absolute;
+    top: 30%;
+    margin: -150px 0 0 -150px;
+    padding-top: 1em;
 }
 
 .student-side {
-    top: 30%;
     left: 32.5%;
-    margin: -150px 0 0 -150px;
-    padding-top: 1em;
 }
 
 .parent-side {
-    top: 30%;
     left: 82%;
     width: max-content;
-    margin: -150px 0 0 -150px;
-    padding-top: 1em;
 }
 
 input {
@@ -85,26 +81,28 @@ input {
     transition: box-shadow 0.5s ease;
 }
 
-.form {
-    cursor: text;
-}
-
 input:focus {
     box-shadow:
         inset 0 -5px 45px rgba(100, 100, 100, 0.4),
         0 1px 1px rgba(255, 255, 255, 0.2);
 }
 
-.names {
+.form {
+    cursor: text;
+}
+
+.names, .group {
     position: relative;
     transition: border 0.2s ease-in;
+}
+
+.names {
     display: flex;
     justify-content: center;
     overflow-x: auto;
 }
 
-.names::before,
-.group::before {
+.names::before, .group::before {
     content: '';
     position: absolute;
     top: 0;
@@ -116,8 +114,7 @@ input:focus {
     transform: translateX(-50%);
 }
 
-.names:hover::before,
-.group:hover::before {
+.names:hover::before, .group:hover::before {
     width: 100%;
 }
 
@@ -148,18 +145,25 @@ input:focus {
     transform: translateY(-50%);
 }
 
-.students {
+.students, .mentors {
     position: absolute;
     top: 30%;
     padding-left: 2vw;
     font-size: 1.5rem;
-    width: var(--left);
     cursor: default;
+}
+
+.students {
+    width: var(--left);
     animation: fade-in 1s ease-in forwards;
 }
 
+.mentors {
+    left: var(--left);
+    width: calc(100% - var(--left));
+}
+
 .group {
-    position: relative;
     flex: 1;
     white-space: nowrap;
     overflow-y: auto;
@@ -172,16 +176,6 @@ input:focus {
     top: 0;
     background: inherit;
     z-index: 1;
-}
-
-.mentors {
-    position: absolute;
-    top: 30%;
-    left: var(--left);
-    padding-left: 2vw;
-    font-size: 1.5rem;
-    width: calc(100% - var(--left));
-    cursor: default;
 }
 
 @keyframes fade-in {
