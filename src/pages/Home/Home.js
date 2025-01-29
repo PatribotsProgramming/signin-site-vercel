@@ -24,8 +24,6 @@ function Home() {
     useEffect(() => {
         const data = getData()
         data.then((data) => {
-            console.log(data)
-
             const studentData = data.Students
             const parentData = data.Parents
 
@@ -44,10 +42,7 @@ function Home() {
                     studentData[name][year][month][day] &&
                     studentData[name][year][month][day].signedIn
                 ) {
-                    console.log(`${name} is signed in.`)
                     studentNames.push(name)
-                } else {
-                    console.log(`${name} is not signed in.`)
                 }
             })
 
@@ -58,10 +53,7 @@ function Home() {
                     parentData[name][year][month][day] &&
                     parentData[name][year][month][day].signedIn
                 ) {
-                    console.log(`${name} is signed in.`)
                     parentNames.push(name)
-                } else {
-                    console.log(`${name} is not signed in.`)
                 }
             })
 
@@ -221,15 +213,7 @@ function Home() {
                                                 className="px-3 text-nowrap text-light name"
                                                 key={name}
                                             >
-                                                <span>
-                                                    {name === 'Emily Hager'
-                                                        ? '🦒 '
-                                                        : ''}
-                                                    <span>{name}</span>
-                                                    {name === 'Emily Hager'
-                                                        ? ' 🦒'
-                                                        : ''}
-                                                </span>
+                                                <span>{name}</span>
                                             </div>
                                         ))}
                                     </div>
@@ -253,7 +237,11 @@ function Home() {
                             key={name}
                         >
                             <span>
-                                <span>{name}</span>
+                                <span>
+                                    {name === 'Jennifer Kurpiewski'
+                                        ? '⭐ Mrs. K ⭐'
+                                        : name}
+                                </span>
                             </span>
                         </div>
                     ))}
@@ -284,7 +272,6 @@ function Home() {
                     index =
                         Object.keys(studentData[name][year][month][day])
                             .length - 3
-                    console.log(index)
                     let inTime =
                         studentData[name][year][month][day][index]['in']
                     timeDiff = outTime - inTime
@@ -313,15 +300,10 @@ function Home() {
                         minutes %= 60
                     }
 
-                    console.log(hours, minutes, seconds)
-
                     timeDiff = `${hours}:${minutes}:${seconds}`
-                    console.log(timeDiff)
                 } catch (error) {
-                    console.log(error)
                 }
 
-                console.log(name, year, month, day, 'duration', timeDiff)
                 setData(
                     isStudent,
                     name,
@@ -332,7 +314,6 @@ function Home() {
                     'duration',
                     timeDiff
                 )
-                console.log(name, year, month, day, 'out', outTime)
                 setData(
                     isStudent,
                     name,
@@ -374,17 +355,12 @@ function Home() {
                 } else {
                     setParentNames(newGroupNames)
                 }
-                console.log(studentData, name, year, month, day, 'in', outTime)
-                console.log(index)
-                // check if the duration exists
                 getData().then((data) => {
                     const studentData = isStudent ? data.Students : data.Parents
                     try {
                         let duration =
                             studentData[name][year][month][day]['duration']
-                        console.log(duration)
                     } catch {
-                        console.log("duration doesn't exist")
                         setData(
                             isStudent,
                             name,
@@ -404,7 +380,6 @@ function Home() {
                         Object.keys(studentData[name][year][month][day])
                             .length - 2
                     )
-                    console.log(index)
                 } catch {
                     index = 0
                 }
