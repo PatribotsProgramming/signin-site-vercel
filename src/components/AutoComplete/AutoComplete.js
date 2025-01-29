@@ -106,6 +106,19 @@ const AutoComplete = ({ whitelist, onSubmit, devSite = false }) => {
                       scoreFn: calculateScore,
                   })
                   .map((el) => el.obj.fullName)
+                  .sort((a, b) => {
+                      const [aFirst, ...aRest] = a.split(' ')
+                      const [bFirst, ...bRest] = b.split(' ')
+                      const aLast = aRest.join(' ')
+                      const bLast = bRest.join(' ')
+                      if (aFirst === bFirst) {
+                          return aLast.localeCompare(bLast)
+                      }
+                      if (aLast === bLast) {
+                          return aFirst.localeCompare(bFirst)
+                      }
+                      return 0
+                  })
             : []
 
         setSuggestions(filter)
