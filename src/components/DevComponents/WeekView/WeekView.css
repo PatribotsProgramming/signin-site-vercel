@@ -36,6 +36,8 @@
     text-align: center;
     padding: 1.5vh calc(4.5vw - 2px); /* make room for the border */
     background-color: rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
 }
 
 .week-view-grid-item {
