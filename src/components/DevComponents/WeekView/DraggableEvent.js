@@ -55,6 +55,7 @@ const calculateEventPosition = (startTime, endTime, date) => {
     startMinute = parseInt(startMinute);
     endHour = parseInt(endHour);
     endMinute = parseInt(endMinute);
+    
     const startHour24 = startAMPM === 'PM' && startHour !== 12 ? startHour + 12 : startHour;
     const endHour24 = endAMPM === 'PM' && endHour !== 12 ? endHour + 12 : endHour;
 
@@ -62,7 +63,7 @@ const calculateEventPosition = (startTime, endTime, date) => {
     // Height should be converted from the duration (as a decimal) to row height
     // Position should be absolute, with a parent div that is relative
     
-    const durationDecimal = (endHour24 - startHour24) + (Math.abs(endMinute - startMinute) / 60);
+    const durationDecimal = (endHour24 - startHour24) + ((endMinute - startMinute) / 60);
     const rowHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--row-height'));
     const height = durationDecimal * rowHeight;
     const top = (startHour24 - 8 + (startMinute / 60)) * rowHeight;
