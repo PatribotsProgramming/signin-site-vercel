@@ -88,7 +88,7 @@ const WeekView = ({ date, user, weekEvents }) => {
                             const isSelected = weekDates[index] === date.getDate();
                             const className = isSelected ? 'selected' : '';
                             return (
-                                <div key={index} className={className}>{day}<br key={index} />{weekDates[index]}</div>
+                                <div key={index} className={className}>{day}<br key={'br-'+index} />{weekDates[index]}</div>
                             );
                         })}
                     </div>
