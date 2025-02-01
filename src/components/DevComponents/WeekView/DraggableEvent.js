@@ -104,7 +104,7 @@ const DraggableEvent = ({ event }) => {
                 '--random-delay': Math.random() * 4,
             }}
         >
-            {heightPx > 2.25 * fontSize && (
+            {heightPx > 2.75 * fontSize && (
                 <>
                     <div className="event-time-top">{event.in}</div>
                     <div className="event-time-bottom">{currentlySignedIn ? "Now" : event.out}</div>
