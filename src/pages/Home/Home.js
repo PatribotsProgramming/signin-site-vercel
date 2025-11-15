@@ -214,8 +214,8 @@ function Home() {
                                                 key={name}
                                             >
                                                 <span>
-                                                    {name === 'Aidan Betschart'
-                                                        ? '🐺 Aidan Betschart 🐺'
+                                                    {name === 'Hyunrin Ryu'
+                                                        ? '🐺 Rin Ryu 🐺'
                                                         : name}
                                                 </span>
                                             </div>
@@ -242,7 +242,7 @@ function Home() {
                         >
                             <span>
                                 <span>
-                                    {name === 'Jennifer Kurpiewski'
+                                    {name === 'Chris Kratt'
                                         ? '⭐ Mrs. K ⭐'
                                         : name}
                                 </span>
