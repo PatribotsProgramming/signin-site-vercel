@@ -13,9 +13,8 @@ function Home() {
     const [isLoading, setIsLoading] = useState(true)
     const [recentActivityState, setRecentActivityState] = useState('')
     const groupNames = [
-        'Build',
+        'Build & Design',
         'Programming',
-        'Design',
         'Marketing',
         'Leadership',
     ]
@@ -243,7 +242,7 @@ function Home() {
                             <span>
                                 <span>
                                     {name === 'Chris Kratt'
-                                        ? '⭐ Mrs. K ⭐'
+                                        ? '⭐ Mrs. Kratt ⭐'
                                         : name}
                                 </span>
                             </span>
