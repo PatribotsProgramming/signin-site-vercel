@@ -8,7 +8,7 @@ const EventList = ({ date, user, forceUpdate, sendEvents }) => {
     const [weekEvents, setWeekEvents] = useState([]);
 
     const [duration, setDuration] = useState('0:0:0');
-    const [studentList, parentList] = useContext(AppContext);
+    const [studentList] = useContext(AppContext);
 
     function toTitleCase(str) {
         return str.replace(/\w\S*/g, function (txt) {
@@ -102,7 +102,7 @@ const EventList = ({ date, user, forceUpdate, sendEvents }) => {
             setDuration(todaysDuration);
             setWeekEvents(weekEventsTemp);
         })
-    }, [user, date, forceUpdate])
+    }, [user, date, forceUpdate, studentList])
 
     useEffect(() => {
         sendEvents(weekEvents)

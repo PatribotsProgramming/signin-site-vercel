@@ -361,8 +361,8 @@ function Home() {
                 getData().then((data) => {
                     const studentData = isStudent ? data.Students : data.Parents
                     try {
-                        let duration =
-                            studentData[name][year][month][day]['duration']
+                        
+                        studentData[name][year][month][day]['duration']
                     } catch {
                         setData(
                             isStudent,

@@ -84,7 +84,7 @@ const DraggableEvent = ({ event }) => {
         currentlySignedIn = true;
     }
 
-    const { top, height, left, duration } = calculateEventPosition(event.in, currentlySignedIn ? currentTime : event.out, event.date);
+    const { top, height, left} = calculateEventPosition(event.in, currentlySignedIn ? currentTime : event.out, event.date);
     const colors = ['#833ab4', '#74b9ff', '#01daba'];
     const lowerColor = interpolateGradient(colors, top / 2.1);
     const upperColor = currentlySignedIn ? "#00c36e" : interpolateGradient(colors, (top + height) / 2.1);
