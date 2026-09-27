@@ -360,10 +360,8 @@ function Home() {
                 }
                 getData().then((data) => {
                     const studentData = isStudent ? data.Students : data.Parents
-                    try {
-                        
-                        studentData[name][year][month][day]['duration']
-                    } catch {
+                    const existingDuration = studentData?.[name]?.[year]?.[month]?.[day]?.['duration']
+                    if (existingDuration === undefined) {
                         setData(
                             isStudent,
                             name,
